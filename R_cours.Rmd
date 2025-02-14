@@ -12,7 +12,9 @@ output:
 source("script_source.R", local=knitr::knit_global())
 ```
 
-<h1>Contenu du cours</h1>
+--- 
+
+**Contenu**
 
 - Introduction
 - RStudio
@@ -35,7 +37,9 @@ source("script_source.R", local=knitr::knit_global())
   
 
 # Introduction
-##
+
+--- 
+
 - language pour l'analyse de données
 - créé en 1996 par R. Ihaka et R. Gentleman
 - développement assuré par des statisticiens rassemblés dans la *R Development Core Team*
@@ -56,26 +60,28 @@ source("script_source.R", local=knitr::knit_global())
 - pas simple d'accès au départ, même si des efforts sont faits pour simplifier les commandes et instructions
 - language limité aux statistiques
 
-# Installation
-##
+## Installation
 
 - R : https://cran.r-project.org/
 - RStudio : https://posit.co/
   
   
 # RStudio
-## 
 
-- Integrated Development Environment (IDE ou *Environnement de Developpement Intégré*) pour R
+---
+
+- Integrated Development Environment (IDE) pour R
 - libre, gratuit et multiplateforme
 
-## 
+---
+
 ![RStudio](img/rstudio_start.png)
 
-##
-3 zones
+---
 
-- la console et le terminal
+**3 zones**
+
+- la console (interpréteur R) et le terminal
 - les variables d'environnement et l'historique des commandes
 - l'aide et la liste des packages
 
@@ -85,36 +91,37 @@ source("script_source.R", local=knitr::knit_global())
 - les fléches haut et bas du clavier permettent de naviguer dans l'historique des commandes
 - touche entrée du clavier pour exécuter la commande tapée
 
-
-## 
+---
 
 - pour stocker une valeur ou un résultat, il faut créer une variable et lui affecter une valeur
-- le signe d'affectation en R est "<-"
+- le signe d'affectation en R est `<-`
+
 ```{r}
 x <- 10
 ```
 
 - on affecte la valeur 10 à l'objet (la variable) x
 - on appelle x dans la console pour afficher la valeur
+
 ```{r}
 x
 ```
 
-- en R tout est objet donc une variable est un objet
-- dès que l'on crée un objet il apparaît dans l'onglet "Environnement"
+- dès que l'on crée une variable elle apparaît dans l'onglet "Environnement"
 - les commandes entrées dans la console apparaissent dans l'onglet "History"
 
-##
+---
 
-- on peut créer autant d'objet que l'on souhaite et faire des opérations avec ces objets
+- on peut créer autant de variables que l'on souhaite et faire des opérations avec
 ```{r}
+x <- 10
 y <- 100
 x + y
 ```
-- les noms des objets peuvent contenir des lettres, chiffres et les symboles "." et "_"
+- les noms de variable peuvent contenir des lettres, chiffres et les symboles "." et "_"
 - ne peuvent pas commencer par un chiffre
 - ne pas mettre d'accents
-- sensible à la casse (x et X sont deux objets différents)
+- sensible à la casse (x et X sont deux variables différents)
 
 ## Projet
 
@@ -149,7 +156,7 @@ File/New File/R Notebook
 
 ![Notebook](img/newNotebook.png)
 
-##
+---
 
 - on peut changer title qui est le titre du notebook
 - ne pas toucher à output
@@ -158,12 +165,14 @@ File/New File/R Notebook
 - insert/R pour insérer un nouveau chunk ou *Ctrl + alt + i*
 - dans le chunk, *Ctrl + Entrée* pour exécuter la ligne courante et *Ctrl + Maj + Entrée* pour exécuter tout le chunk
 
-##
+---
+
 le résultat de l'exécution du chunk est affiché juste en dessous
 
 ![Notebook](img/notebook1.png)
 
-##
+---
+
 le rendu en html du notebook, créé automatiquement à chaque enregistrement du fichier
 
 ![Notebook sortie](img/notebook2.png)
@@ -171,7 +180,7 @@ le rendu en html du notebook, créé automatiquement à chaque enregistrement du
 ## Markdown
 
 - html simplifié
-- utilisé pour structurer le Notebook avec des titres, des morceaux de texte en gras ou italique, des liens, des listes à puces ou numérotées etc.
+- utilisé pour structurer le Notebook avec des titres, du texte en gras ou italique, des liens, des listes à puces ou numérotées etc.
 - RStudio propose un guide rapide : Help/Markdown Quick Reference
 
 ## Packages
@@ -186,14 +195,24 @@ le rendu en html du notebook, créé automatiquement à chaque enregistrement du
 
 ![Packages](img/packages.png)
 
-## Pratique
+---
 
-- créer un nouveau projet (création d'un nouveau dossier R dans P:/)
+**Pratique**
+
+- créer un nouveau projet
 - créer un nouveau notebook
 - installer les packages tidyverse et questionr puis les charger
 
+```
+install.packages("tidyverse")
+install.packages("questionr")
+library(tidyverse)
+library(questionr)
+```
+
 
 # Les bases de R
+
 ## Les types de données
 
 - numériques : integer (entier) ou double (décimaux). Par défaut les objets numériques sont considérés comme des double, il faut ajouter un L pour que ce soit un integer
@@ -203,28 +222,21 @@ le rendu en html du notebook, créé automatiquement à chaque enregistrement du
 - typeof(objet) pour connaître le type
 
 ```{r}
-x <- 10
-print(typeof(x))
-y <-10L
-print(typeof(y))
-```
-
-```{r}
-a <- "coucou"; b <- TRUE
+a <- "coucou"
 print(typeof(a))
-print(typeof((b)))
 ```
 
-## L'objet vecteur
+## Le vecteur
 
-- pour stocker plusieurs valeurs dans le même objet
-- toutes les valeurs du vecteur doivent être du même type
+- pour stocker plusieurs valeurs dans le même objet (tableau unidimensionnel)
+- toutes les valeurs du vecteur doivent être du même type 
 
 ```{r}
 vec_1 <- c(1, 10, 15)
 vec_1
 ```
-- "c()" est une fonction qui concatène les différentes valeurs dans le même vecteur 
+
+`c()` est une fonction qui concatène les différentes valeurs dans le même vecteur 
 
 ```{r}
 (vec_2 <- c("coucou", "hello world"))
@@ -232,7 +244,7 @@ vec_1
 
 *Rmq : dans un chunk si on met entre parenthèses la commande ça l'exécute puis affiche la sortie*
 
-##
+---
 
 une opération appliquée à un vecteur s'applique à toutes les valeurs que contient le vecteur
 
@@ -240,79 +252,81 @@ une opération appliquée à un vecteur s'applique à toutes les valeurs que con
 tailles <- c(1.75, 1.54, 1.85, 1.92)
 (tailles_cm <- tailles * 100)
 ```
+
 ```{r}
 poids <- c(72, 59, 110, 95)
 (imc <- poids / tailles ^ 2)
 ```
 
-## 
+---
 
-- possible créer des vecteurs vides, en précisant le type: numeric(), character(), logical()
-- si on ajoute un entier en argument cela crée le vecteur avec le nombre d'éléments correspondants, avec des valeurs par défaut (0 pour numeric, "" pour character et FALSE pour logical)
-- l'opérateur ":" permet de créer un vecteur d'entiers qui se suivent
+- possible créer des vecteurs vides, en précisant le type: numeric(), character(), logical(). **Si on ajoute un entier en argument cela crée le vecteur avec le nombre d'éléments correspondants**, avec des valeurs par défaut (0 pour numeric, "" pour character et FALSE pour logical)
 ```{r}
 numeric(10)
 ```
+
+- l'opérateur ":" permet de créer un vecteur d'entiers qui se suivent
+
 ```{r}
 1:10
 ```
 
-##
+---
 
-- pour accéder à un élément du vecteur, utilisation de l'opérateur \[\] et entre les crochets le numéro de l'élément souhaité (son index dans le vecteur, sachant que la numérotation commence à 1)
+pour accéder à un élément du vecteur, utilisation de l'opérateur \[\] et entre les crochets le numéro de l'élément souhaité (son index dans le vecteur, sachant que la numérotation commence à 1)
+
 ```{r}
 tailles
 ```
 ```{r}
 tailles[2]
 ```
+
 possible de demander plusieurs éléments via un vecteur
+
 ```{r}
 tailles[2:3]
 ```
+
 ou
+
 ```{r}
 tailles[c(1, 3)]
 ```
 
-## 
-### Pratique
-construire le vecteur suivant
-```{r, echo=F}
-(x <- c(120, 134, 256, 12))
-```
-utiliser ce vecteur pour générer les deux vecteurs suivants
-```{r, echo=F}
-x + 100
-```
-```{r, echo=F}
-x * 2
-```
-on a les données suivantes
+---
+
+**Pratique**
+
+A partir des données ci-dessous, calculer le revenu global du foyer puis le revenu par personne.
+
 ```{r, eval=F}
 conjoint1 <- c(1200, 1180, 1750, 2100)
 conjoint2 <- c(1450, 1870, 1690, 0)
 nb_personnes <- c(4, 2, 3, 2)
 ```
-- calculer le revenu global du foyer, puis le revenu par personne
 
-## Fonctions
 
-- pour effectuer des calculs ou accomplir des actions
-- une fonction est un objet qui contient un ensemble d'instructions et renvoie un résultat
-- on appelle une fonction avec son nom suivi de parenthèses avec dedans zéro, un ou plusieurs paramètres (arguments)
-- appel ci-dessous de la fonction *mean* qui calcule la moyenne des valeurs du vecteur passé en paramètre
+## Les fonctions
+
+*- **pour effectuer des calculs ou accomplir des actions**
+
+- une fonction contient un ensemble d'instructions et renvoie un résultat
+- on appelle une fonction avec son nom, suivi de parenthèses avec dedans zéro, un ou plusieurs arguments
+
 ```{r}
+# la fonction mean calcule la moyenne
 mean(tailles)
 ```
+
 ```{r}
+# la fonction min donne la valeur minimale du vecteur
 min(tailles)
 ```
-```{r}
-max(tailles)
-```
 
-## 
+
+---
+
 ### Autres fonctions utiles
 
 - length(v): renvoie la longueur de v (nombre d'éléments)
@@ -322,17 +336,18 @@ max(tailles)
 - seq(from, to, by): création d'un vecteur de from à to par intervalles de by
 - seq(from, to, length.out): création d'un vecteur de from à to de longueur length.out
 - rep(vecteur, nombre de fois)
+
 ```{r}
+# création d'une séquence 
 seq(1, 20, by=4)
 ```
+
 ```{r}
-seq(1, 20, length.out=4)
-```
-```{r}
+# création d'un vecteur par répétition de vecteur
 rep(1:3, 2)
 ```
 
-##
+---
 ### Aide et arguments
 
 - ?nom_fonction (ou *help("nom_fonction")*) pour afficher l'aide de la fonction
@@ -340,7 +355,7 @@ rep(1:3, 2)
 - dans la signature de la fonction les arguments obligatoires n'ont pas de valeur par défaut, les arguments facultatifs en ont un
 - par exemple la fonction mean a un argument obligatoire et un argument facultatif *na.rm*, qui permet de ne pas considérer les valeurs manquantes (NA) pour calculer la moyenne
 
-## 
+--- 
 ```{r}
 (tailles <- c(tailles, NA))
 ```
@@ -350,40 +365,35 @@ mean(tailles)
 ```{r}
 mean(tailles, na.rm=TRUE)
 ```
+
 Attention, comme la fonction *mean* a plusieurs arguments facultatifs, il faut appeler la fonction en utilisant l'argument avec son nom, ici *na.rm*.
 
-## 
-### Pratique
+--- 
 
-soit les deux vecteurs suivants:
+**Pratique**
+
+A partir des deux vecteurs ci-dessous, calculer la témpérature moyenne et le total des précipitations
+
 ```{r, eval=F}
 temperature <- c(3.4, 4.8, 8.4, 11.4, 15.8, 19.4, 22.2, 21.6, 17.6, 13.4, 7.6, 4.4)
 precipitations <- c(47.2, 44.1, 50.4, 74.9, 90.8, 75.6, 63.7, 62, 87.5, 98.6, 81.9, 55.2)
 ```
-- calculer la température moyenne
-- calculer le total des précipitations
 
-soit les vecteurs de notes suivants (6 élèves):
+---
+
+Avec les vecteurs de notes suivants (6 élèves) :
+
+- faire afficher le min et le max dans chaque matière
+- calculer la moyenne générale de chaque élève
+
 ```{r, eval=F}
 python <- c(12, 16, 8, 18, 6, 10)
 html <- c(14, 9, 13, 15, 17, 11)
 bdd <- c(18, 11, 14, 10, 8, 12)
 ```
-- faire afficher le min et le max dans chaque matière
-- calculer la moyenne générale de chaque élève
 
-##
-chercher dans l'aide pour comprendre le vecteur renvoyé par la fonction pmin (et pmax)
-```{r, echo=F}
-python <- c(12, 16, 8, 18, 6, 10)
-html <- c(14, 9, 13, 15, 17, 11)
-bdd <- c(18, 11, 14, 10, 8, 12)
-```
-```{r}
-pmin(python, html, bdd)
-```
 
-## data frame
+## Le data frame
 
 - tableau de données bi-dimensionnel (lignes, colonnes)
 - chaque colonne est un vecteur de données
@@ -400,8 +410,9 @@ cela a pour effet de mettre le jeu de données dans l'environnement de travail (
 
 Cliquer sur l'objet dans l'onglet environnement pour voir le tableau de données (on peut aussi appeler la fonction View(hdv2003))
 
-## 
-### Fonctions utiles quand on découvre un jeu de données
+---
+
+### Fonctions utiles
 
 - nouveau nom: df <- hdv2003 - on fait une copie avec comme nom df plutôt que hdv2003 (long à taper)
 - nrow(df): renvoie le nombre de lignes
@@ -420,27 +431,31 @@ dim(df)
 names(df)
 ```
 
-##
+---
+
 ### Sélection de données
 
 - pour accéder à une variable : objet$colonne
 - renvoie le vecteur correspondant
+
 ```{r}
 head(df$age)
 ```
 
 - on peut aussi se servir du '$' pour créer une nouvelle variable : dans le dataset il y a la variable heures.tv, on va créer la variable minutes.tv
+
 ```{r}
 head(df$heures.tv)
 df$minutes.tv <- df$heures.tv * 60
 head(df$minutes.tv)
 ```
 
-## 
+---
 
 - autrement, l'opérateur \[\], comme pour les vecteurs, fonctionne, si on veut sélectionner des lignes
 - dans cet opérateur il y a maintenant 2 dimensions: les lignes et les colonnes
 - si on veut les lignes 10 à 12, et pour ces lignes toutes les colonnes
+
 ```{r, eval=F}
 df[10:12,]
 ```
@@ -449,17 +464,20 @@ df[10:12,]
 knitr::kable(df[10:12, 1:7], row.names=NA)
 ```
 
-## 
+--- 
 
-- si seulement certaines colonnes
+si seulement certaines colonnes
+
 ```{r, eval=F}
 df[10:12, 2:5]
 ```
+
 ```{r, echo=F}
 knitr::kable(df[10:12, 2:5])
 ```
 
-- ou par leur nom
+ou par leur nom
+
 ```{r, eval=F}
 df[10:12, c("age", "sexe", "poids")]
 ```
