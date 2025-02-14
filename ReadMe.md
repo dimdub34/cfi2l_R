@@ -20,4 +20,5 @@
   * mise en forme des données
   * tri et sélection
   * graphiques
-  
+ 
+>https://www.duboishome.info/dimitri/cours/cfi2l/R 
