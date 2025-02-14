@@ -1,11 +1,12 @@
 ---
 title: "<img src='img/R_logo.png' style='width: 200px' />"
-author: "D. Dubois <br> <span style='font-style:italic'>dimitri.dubois@umontpellier.fr</span>"
+author: "D. Dubois"
 output: 
   revealjs::revealjs_presentation:
     css: custom.css
     reveal_options:
       slideNumber: true
+      output_file: "index.html"
 ---
 
 ```{r, include=FALSE}
