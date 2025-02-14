@@ -1,6 +1,6 @@
-Cours R pour Débutants.
+# Cours R pour Débutants.
 
-[200~**Contenu**
+**Contenu**
 
 - Introduction
 - RStudio
