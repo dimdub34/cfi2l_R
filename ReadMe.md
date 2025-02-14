@@ -21,4 +21,4 @@
   * tri et sélection
   * graphiques
  
->https://www.duboishome.info/dimitri/cours/cfi2l/R 
+<https://www.duboishome.info/dimitri/cours/cfi2l/R>
