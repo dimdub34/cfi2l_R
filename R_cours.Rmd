@@ -1595,6 +1595,8 @@ ggplot(rp, aes(x=dipl_sup, y=cadres)) +
   geom_point() + geom_smooth(method ="lm", color="red")
 ```
 
+---
+
 ### Courbes
 
 chargement d'un jeu de données du package ggplot2 : economics
