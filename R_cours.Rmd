@@ -31,7 +31,7 @@ source("script_source.R", local=knitr::knit_global())
 --- 
 
 - language pour l'analyse de données
-- créé en 1996 par R. Ihaka et R. Gentleman
+- créé en 1996 par Ross Ihaka et Robert Gentleman
 - développement assuré par des statisticiens rassemblés dans la **R Development Core Team**
 - publié sous licence GNU GPL  
 
@@ -101,7 +101,7 @@ x <- 10
 x
 ```
 
-- les variables appraîssent dans l'onglet "Environnement", ce sont les objets en mémoire pour la session en cours
+- les variables apparaissent dans l'onglet "Environnement", ce sont les objets en mémoire pour la session en cours
 - les commandes entrées dans la console apparaissent dans l'onglet "History"
 
 ---
@@ -109,7 +109,7 @@ x
 - les noms de variable peuvent contenir des lettres, chiffres et les symboles "." et "_"
 - ne peuvent pas commencer par un chiffre
 - ne pas mettre d'accents
-- sensible à la casse (x et X sont deux variables différents)
+- sensible à la casse (x et X sont deux variables différentes)
 
 ## Projet
 
@@ -173,12 +173,12 @@ A chaque enregistrement du notebook, R génère le fichier html du notebook
 
 ## Packages
 
-- système d'extension des possibilités offertes par l'installation de base (R Core)
-- ces extensions sont développées et maintenues par la communauté
-- elles sont regroupées au sein du réseau CRAN (Comprehensive R Archive Network)
-- pour installer une extension on peut cliquer le bouton `Install` de l'onglet `Packages`
-- il faut alors taper le nom du package et cliquer sur `Install`
-- ensuite pour pouvoir l'utiliser il faut le charger, avec la commande `library(nom_du_package)`
+- extensions des fonctionnalités de base (R Core)
+- développés et maintenus par la communauté
+- regroupés au sein du CRAN (Comprehensive R Archive Network)
+- bouton `Install` de l'onglet `Packages`
+- taper le nom du package et cliquer sur `Install`
+- pour utiliser le package il faut le charger, avec `library(nom_du_package)`
 - la commande `library()` est par convention placée dans le premier chunk du notebook (ou en première ligne du script)
 
 ![Packages](img/packages.png)
@@ -205,6 +205,7 @@ library(questionr)
 - numériques : integer (entier) ou double (décimaux)
 - chaînes de caractères : character
 - booléens : logical
+- catégorielles : factor
 - NA : donnée manquante (Not Available)
 - typeof(objet) pour connaître le type
 
@@ -215,8 +216,7 @@ print(typeof(a))
 
 ## Le vecteur
 
-- pour stocker plusieurs valeurs dans le même objet (tableau unidimensionnel)
-- toutes les valeurs du vecteur doivent être du même type 
+pour stocker plusieurs valeurs dans une variable (tableau unidimensionnel)
 
 ```{r}
 tailles <- c(1.75, 1.54, 1.85, 1.92)
@@ -229,7 +229,7 @@ tailles
 (poids <- c(72, 59, 110, 95))
 ```
 
-💡 *Dans un chunk, des parenthèses autour du code exécute le code et affiche le résutat*
+💡 *Dans un chunk, mettre des parenthèses autour du code exécute le code et affiche le résutat*
 
 ---
 
@@ -349,7 +349,7 @@ min(tailles)
 
 ---
 
-**Combinaison de données avec `rbind` et `cbind`**  
+**Combinaison de vecteurs avec `rbind` et `cbind`**  
 
 - `rbind` pour combiner des vecteurs en ligne
 - `cbind` pour combiner des vecteurs en colonne
@@ -373,7 +373,7 @@ min(tailles)
 
 ---
 
-**Calcul de moyennes avec `rowMeans` et `colMeans`**
+**Calcul de moyennes sur un objet contenant plusieurs vecteurs : `rowMeans` et `colMeans`**
 
 - `rowMeans` pour calculer la moyenne des lignes
 - `colMeans` pour calculer la moyenne des colonnes
@@ -464,7 +464,9 @@ names(hdv2003)
 
 💻 **Pratique**
 
-Appeler chacune des fonctions de "découverte" sur le jeu de données `hdv2003`.
+- Charger le jeu de données `hdv2003` du package `questionr`
+- Appeler chacune des fonctions de "découverte" sur le jeu de données `hdv2003`.
+
 
 ## La matrice
 
@@ -527,23 +529,23 @@ Structure de données qui peut contenir des éléments de types différents (vec
 
 **Utilisation des libraires du `tidyverse`**
 
-Ensemble de librairies avec pour objectif de faciliter le chargement, le nettoyage, le tri, l'analyse de données et les représentations graphiques  
+Ensemble de librairies créées pour faciliter le chargement, le nettoyage, le tri, l'analyse de données et les représentations graphiques  
 `library(tidyverse)`
 
-![Tidyverse](img/tidyverse.png)
+<img src="img/tidyverse.png" style="height: 200px" />
 
 ggplot2 (visualisation), dplyr (manipulation des données), tidyr (mise en forme des données), purrr (programmation), readr (importation de données), tibble (tableaux de données), forcats (variables qualitatives),  stringr (chaînes de caractères)
 
 ## Le Tibble
 
-**Dans le tidyverse, le `tibble` est la version moderne du dataframe**
+**Le `tibble` est la version moderne du dataframe**
 
-- les fonctions des librairies du tidyverse acceptent un dataframe en entrée, mais retournent un tibble
 - par rapport au dataframe, le tibble
   + n'a pas de nom de lignes
   + autorise des noms de colonnes avec espaces, caractères spéciaux, nombres etc.
   + a un affichage par défaut sur qq lignes uniquement, avec des informations sur chaque variable
   + affiche un avertissement si on essaie d’accéder à une colonne qui n’existe pas
+- les fonctions des librairies du tidyverse acceptent un dataframe en entrée, mais retournent un tibble
 
 ---
 
@@ -609,6 +611,7 @@ hdv2003$qualif_grouped <- fct_recode(
 )
 freq(hdv2003$qualif_grouped)
 ```
+💡 le "$" permet d'afficher un vecteur d'un dataframe, mais permet aussi d'en créer un nouveau, autrement dit de créer une nouvelle variable dans le dataframe. 
 
 ---
 
@@ -728,7 +731,7 @@ freq(hdv2003$age_classe)
 hdv2003$age_classe2 <- cut(
     hdv2003$age, 
     breaks = c(18, 25, 35, 45, 55, 65, 100), 
-    include.lowest = T
+    include.lowest = T  # pour inclure le 18
 )
 freq(hdv2003$age_classe2)
 ```
@@ -939,7 +942,7 @@ select(airports, lat, lon)
 
 ---
 
-Un "`-`" devant le nom de colonne cela affiche toutes les colonnes sauf elle
+Un "`-`" devant le nom de colonne affiche toutes les colonnes sauf celle avec le moins
 
 ```{r}
 select(airports, -lat)
@@ -1263,7 +1266,7 @@ freq(hdv2003$qualif, valid=F, total=T, sort="dec")
 ## Analyse bivariée
 
 - étudier la relation entre 2 variables
-- l'analyse va du type des variables: 
+- l'analyse va dépendre du type des variables: 
   + qualitative-qualitative
   + qualitative-quantitative
   + quantitative-quantitative
@@ -1603,7 +1606,10 @@ chargement d'un jeu de données du package ggplot2 : economics
 
 ```{r, eval=F}
 data("economics")
-economics
+```
+
+```{r}
+head(economics)
 ```
 
 ---
@@ -1616,14 +1622,14 @@ ggplot(chom) +
   geom_line(aes(x=date, y=unemploy))
 ```
 
-Pour ajouter plusieurs courbes dans le graphique, plusieurs appels à `geom_line` (avec "+" entre chaque)
+💡 Pour ajouter plusieurs courbes dans le graphique, plusieurs appels à `geom_line` (avec "+" entre chaque)
 
 ## Trois ou quatre variables
 
 **Le mappage**
 
 - Associer un des attributs du graphique (couleur, taille) à une variable
-- Permet de rendre visuelle une troisième dimension (voire une quatrième)
+- Permet de visualiser une troisième dimension (voire une quatrième)
 - Le mappage se fait dans l'appel de la fonction `aes()`
 
 ```{r, fig.height=4}
@@ -1633,7 +1639,7 @@ ggplot(rp) +
 
 ---
 
-Ajout d'une 4ème dimension avec la taille des points, qui représente la population totale de la commune
+Ajout d'une 4ème dimension avec la taille des points, ici la population totale de la commune
 
 ```{r, fig.height=4}
 ggplot(rp) +
@@ -1649,6 +1655,14 @@ Décomposer un graphique en plusieurs, selon les modalités d'une ou plusieurs v
 ```{r, fig.height=4}
 ggplot(rp) +
   geom_histogram(aes(x=cadres), breaks=seq(0, 60, 10)) +
+  facet_wrap(vars(departement))
+```
+
+---
+
+```{r, fig.height=4}
+ggplot(rp) +
+  geom_point(aes(x=dipl_sup, y=cadres, color=proprio, size=pop_tot)) + 
   facet_wrap(vars(departement))
 ```
 
