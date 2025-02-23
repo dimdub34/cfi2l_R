@@ -1537,8 +1537,7 @@ ggplot(data=rp) +
 
 ---
 
-Si on veut ajouter un "y" que l'on a calculé soit même alors il faut ajouter l'argument `stat="identity"` dans l'appel de la fonction `geom_bar`    
-Exemple: calcul du pourcentage que représente le nombre de communes de chaque département par rapport au total
+**`geom_col`** pour un graphique en colonnes avec des valeurs personnalisées (ici le pourcentage)
 
 ```{r, fig.height=4}
 rp |> 
@@ -1546,14 +1545,15 @@ rp |>
   summarise(n=n()) |> 
   mutate(pourcent=n/sum(n) * 100) |>
   ggplot() + 
-  geom_bar(aes(x=departement, y=pourcent), stat="identity")
+  geom_col(aes(x=departement, y=pourcent))
 ```
 
 ---
 
 ### Camembert
 
-**`geom_bar` avec coordonnées polaires**  
+**`geom_col` avec coordonnées polaires**  
+
 ggplot2 ne propose pas de graphique camembert, mais on peut le faire avec coordonnées polaires  
 
 ```{r, fig.height=4}
@@ -1562,8 +1562,8 @@ rp |>
   summarise(n=n()) |> 
   mutate(pourcent=n/sum(n) * 100) |>
   ggplot() + 
-  geom_bar(aes(x="", y=pourcent, fill=departement), stat="identity") + 
-  coord_polar("y")
+  geom_col(aes(x="", y=pourcent, fill=departement)) + 
+  coord_polar("y", start=0)
 ```
 
 ## Deux variables
