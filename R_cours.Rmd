@@ -6,7 +6,6 @@ output:
     css: custom.css
     reveal_options:
       slideNumber: true
-      output_file: "index.html"
 ---
 
 ```{r, include=FALSE}
@@ -17,16 +16,16 @@ source("script_source.R", local=knitr::knit_global())
 
 **Contenu**
 
-1. Présentation et installation de R
-2. Présentation de RStudio
-3. Structures de données
-4. Préparation d'un jeu de données
-5. Manipulation d'un jeu de données
-6. Analyse d'un jeu de données 
-7. Visualisation d'un jeu de données
+1. [Présentation et installation de R](#presentation)
+2. [Présentation de RStudio](#rstudio)
+3. [Structures de données](#structures)
+4. [Préparation d'un jeu de données](#preparation)
+5. [Manipulation d'un jeu de données](#manipulation)
+6. [Analyse d'un jeu de données](#analyse)
+7. [Visualisation d'un jeu de données](#visualisation)
   
 
-# 1. Présentation de R
+# 1. Présentation de R {#presentation}
 
 --- 
 
@@ -62,7 +61,7 @@ source("script_source.R", local=knitr::knit_global())
 - RStudio : https://posit.co/
 
   
-# 2. RStudio
+# 2. RStudio {#rstudio}
 
 ---
 
@@ -198,7 +197,7 @@ library(tidyverse)
 library(questionr)
 ```
 
-# 3. Structures de données
+# 3. Structures de données {#structures}
 
 ## Les types de données
 
@@ -518,7 +517,7 @@ Structure de données qui peut contenir des éléments de types différents (vec
 ))
 ```
 
-# 4. Préparation d'un jeu de données
+# 4. Préparation d'un jeu de données {#preparation}
 
 ---
 
@@ -857,7 +856,7 @@ la colonne variable devrait être divisée en deux variables lifeExp et pop
 pivot_wider(data=tidy_ex1, names_from=variable, values_from=value)
 ```
 
-# 5. Manipulation d'un jeu de données
+# 5. Manipulation d'un jeu de données {#manipulation}
 
 ---
 
@@ -1170,7 +1169,7 @@ flights |>
 4. calculer le nombre de vols par mois et créer une colonne qui affiche le pourcentage que cela représente sur les vols annuels
 
 
-# 6. Analyse d'un jeu de données
+# 6. Analyse d'un jeu de données {#analyse}
 
 ## Analyse univariée
 
@@ -1464,7 +1463,7 @@ summary(lm(rp2012$cadres ~ rp2012$dipl_sup))
 Analyser la relation entre les variables dipl_aucun (proportion de personnes sans diplômes) et proprio
 
 
-# 7. Visualisation d'un jeu de données
+# 7. Visualisation d'un jeu de données {#visualisation}
 
 ---
 
