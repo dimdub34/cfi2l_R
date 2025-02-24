@@ -1579,15 +1579,6 @@ ggplot(data=rp) +
 
 ---
 
-Personnalisation du graphique avec paramètres supplémentaires dans `geom_point`
-
-```{r, fig.height=4}
-ggplot(data=rp) +
-  geom_point(aes(x=dipl_sup, y=cadres), col="blue", size=2)
-```
-
----
-
 **Ajout d'une droite de régression avec `geom_smooth`** en plus de `geom_point`
 
 💡 Si plusieurs `geom` utilisent les mêmes éléments dans `aes`, la fonction `aes()` peut être appelée dans `ggplot`
