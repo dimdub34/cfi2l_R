@@ -1354,15 +1354,17 @@ hdv2003 |>
 
 **Test statistique**
 
-- tester si l'âge moyen est statistiquement différent entre les sportifs et les non-sportifs 
-- si la variable quantitative suit un loi normale test paramétrique de student, sinon test non-paramétrique de Mann-Whitney
-- test de normalité : le test de shapiro - $H_0$ la distribution suit une loi normale
+- si la variable qualitative est binaire (2 modalités), test de Mann-Withney (non paramétrique) ou test de student (paramétrique)
+- si la variable qualitative a plus de 2 modalités, test de Kruskal-Wallis (non paramétrique) ou test de Anova (paramétrique)
+
+Paramétrique ou non : test de normalité de la variable quantitative, avec le test de Shapiro - $H_0$ la distribution suit une loi normale.  
+Si la variable quantitative suit un loi normale test paramétrique, autrement test non paramétrique.
 
 ```{r}
 shapiro.test(hdv2003$age)
 ```
 
-la p-value est inférieure à 5% donc on rejette $H_0$, il faut utiliser un test non-paramétrique  
+La p-value est inférieure à 5% donc on rejette $H_0$, il faut utiliser un test non-paramétrique.  
 
 ---
 
@@ -1378,7 +1380,7 @@ Test de Student ($H_0$: l'âge moyen des deux modalités n'est pas différent)
 t.test(hdv2003$age ~ hdv2003$sport)
 ```
 
-dans les deux tests la p-value est inférieure à 5% donc $H_0$ est rejetée, autrement dit l'âge moyen des sportifs est significativement inférieur à celui des non-sportifs
+Dans les deux tests la p-value est inférieure à 5% donc $H_0$ est rejetée, autrement dit l'âge moyen des sportifs est significativement inférieur à celui des non-sportifs
 
 ---
 
@@ -1403,16 +1405,14 @@ data("rp2012")
 
 ---
 
-#### Coefficient de corrélation
+**Coefficient de corrélation**
 
 Pour déterminer la relation entre deux variables numériques, calcul du coefficient de corrélation.  
 Le coefficient de corrélation varie entre -1 et 1, il mesure la force et le sens de la relation entre deux variables.  
 Un coefficient proche de -1 indique une relation négative (lorsque l'une des variables augmente l'autre diminue), et un coefficient proche de 1 indique une relation positive (les deux variables vont dans le même sens).
 
-Si la relation est linéaire utilisation du coefficient de corrélation de Pearson (méthode par défaut)
-
 ```{r}
-cor(rp2012$cadres, rp2012$dipl_sup, method="pearson")
+cor(rp2012$cadres, rp2012$dipl_sup)
 ```
 
 Le coefficient indique qu'il y a une forte relation linéaire positive. 
@@ -1423,38 +1423,10 @@ Test statistique correspondant avec la fonction *cor.test()*
 $H_0$ : le coefficient est égal à 0
 
 ```{r}
-cor.test(rp2012$cadres, rp2012$dipl_sup, method="pearson")
+cor.test(rp2012$cadres, rp2012$dipl_sup)
 ```
 
 Rejet de $H_0$, la corrélation est significativement différente de 0.
-
----
-
-Si la relation n'est pas linéaire il faut utiliser la méthode des rangs de Spearman
-
-```{r}
-cor(rp2012$cadres, rp2012$dipl_sup, method="spearman")
-```
-
----
-
-#### Régression linéaire
-
-Si la relation entre deux variables est linéraire, estimation de la regression linéaire, c'est à dire des paramètres de la droite qui représente au mieux le nuage de points.
-
-```{r}
-lm(rp2012$cadres ~ rp2012$dipl_sup)
-```
-
-La constante est égale à 0.9217 et la pente de la droite à 1.0816
-
----
-
-Si la sortie de la fonction `lm` est placée en argument de la fonction `summary` alors davantage d'informations
-
-```{r}
-summary(lm(rp2012$cadres ~ rp2012$dipl_sup))
-```
 
 ---
 
@@ -1595,7 +1567,7 @@ ggplot(rp, aes(x=dipl_sup, y=cadres)) +
 chargement d'un jeu de données du package ggplot2 : economics
 
 ```{r, eval=F}
-data("economics")
+data(package="ggplot2", "economics")
 ```
 
 ```{r}
@@ -1658,6 +1630,34 @@ ggplot(rp) +
 
 ## Personnalisation des graphiques  
 
+- `theme` pour l'aspect général
+- `labs` pour les titres des axes et du graphique
+- `scale_*` pour la personnalisation des échelles
+
+---
+
+`theme` pour la personnalisation
+
+Existe : `theme_gray` (défault), `theme_minimal`, `theme_light`, `theme_dark`, `theme_bw`, `theme_classic`, `theme_void`
+
+```{r, fig.height=4}
+ggplot(rp) +
+  geom_point(aes(x=dipl_sup, y=cadres)) +
+  theme_light()
+```
+
+---
+
+`labs` pour les titres
+
+```{r, fig.height=4}
+ggplot(rp) +
+  geom_point(aes(x=dipl_sup, y=cadres)) +
+  labs(title="Relation entre diplômes supérieurs et cadres", x="Diplômes supérieurs", y="Cadres")
+```
+
+---
+
 `scale_x_continuous` et `scale_y_continuous` pour les axes x et y de données quantitatives
 
 ```{r, fig.height=4}
@@ -1690,8 +1690,8 @@ Avec le dataset rp2012
 1. un nuage de points x=dipl_aucun et y=ouvr, avec titre des axes, et points en bleu
 2. même graphique que précédemment mais avec un mappage de couleur selon la région
 3. boxplot: distribution de la variable proprio par rapport à la taille de departement (pop_cl)
-4. nuage de points avec en x=dipl_sup et y=cadres avec un graphique par région (facet_wrap)
-5. boxplot: distribution du pourcentage moyen de propriétaires par département au sein de chaque région
+4. graphique en barres avec le nombre total de propriétaires par région
+5. nuage de points avec en x=dipl_sup et y=cadres avec un graphique par région (facet_wrap)
 
 
 # Sources
